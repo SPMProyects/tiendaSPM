@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'BackendController@index')->name('backend.index');
 
 Route::resource('users', 'UserController');
+Route::resource('currencies', 'CurrencyController');

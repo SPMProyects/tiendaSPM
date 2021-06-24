@@ -145,13 +145,13 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('currencies.index')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Lista</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('currencies.create')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Crear</p>
                     </a>

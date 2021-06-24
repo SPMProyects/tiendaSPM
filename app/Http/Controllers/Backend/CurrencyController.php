@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Currency;
 
-class UserController extends Controller
+class CurrencyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +14,15 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {   
-        
+    {
         if($request->has("lista") && $request->input("lista") == "eliminados"){
-            $users = User::onlyTrashed()->get();
+            $currencies = Currency::onlyTrashed()->get();
         }else{
-            $users = User::all();
+            $currencies = Currency::all();
         }
 
-        return view('backend.users.index')->with([
-            'users' => $users,
+        return view('backend.currencies.index')->with([
+            'currencies' => $currencies,
         ]);
     }
 
@@ -35,7 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('backend.users.create');
+        return view('backend.currencies.create');
     }
 
     /**
@@ -46,19 +44,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required|max:50',
-            'email' => 'required|unique:users,email',
-            'address' => 'max:255',
-            'password' => 'min:8',
+            'value' => 'required|numeric|min:0.001',
         ]);
 
-        User::create($request->only('name','email','address','admin') + ['password' => bcrypt($request->input('password'))]);
+        Currency::create($request->all());
 
-        session()->flash('status','El usuario se creo con exito');
+        session()->flash('status','La moneda se creo con exito');
 
-        return view('backend.users.index')->with(['users' => User::all()]);
+        return view('backend.currencies.index')->with(['currencies' => Currency::all()]);
     }
 
     /**
@@ -69,7 +64,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -80,7 +75,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.users.edit')->with(['user' => User::findOrFail($id)]);
+        return view('backend.currencies.edit')->with(['currency' => Currency::findOrFail($id)]);
     }
 
     /**
@@ -94,21 +89,12 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|max:50',
-            'email' => 'required|unique:users,email,'.$request->id,
-            'address' => 'max:255',
-            'password' => 'sometimes|nullable|min:8',
+            'value' => 'required|numeric|min:0.001',
         ]);
 
-        if($request->input('password') == ''){
-            $data = $request->only('name','email','address','admin');
-        }else{
-            $data = $request->all();
-            $data['password'] = bcrypt($request->input('password'));
-        }
-
-        User::findOrFail($id)->update($data);
+        Currency::findOrFail($id)->update($request->all());
         
-        session()->flash('status','El usuario se edito con exito');
+        session()->flash('status','La moneda se edito con exito');
         
         return redirect()->back();
     }
@@ -122,12 +108,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         if(request()->has('eliminar')){
-            User::withTrashed()->where('id', $id)->first()->forceDelete();
+            Currency::withTrashed()->where('id', $id)->first()->forceDelete();
         }else{
-            User::withTrashed()->where('id', $id)->first()->delete();
+            Currency::withTrashed()->where('id', $id)->first()->delete();
         }
         
-        return redirect()->route('users.index')->with('status','Usuario eliminado correctamente');
-
+        return redirect()->route('currencies.index')->with('status','Moneda eliminada correctamente');
     }
 }
