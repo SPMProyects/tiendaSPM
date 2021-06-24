@@ -32,3 +32,6 @@
 <script src="{{asset('back/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('back/dist/js/pages/dashboard.js')}}"></script>
+
+<!-- General Laravel Mix js-->
+<script src="{{asset('js/app.js')}}"></script>
