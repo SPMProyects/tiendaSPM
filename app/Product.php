@@ -20,4 +20,8 @@ class Product extends Model
     public function currency(){
         return $this->belongsTo(Currency::class);
     }
+
+    public function images(){
+        return $this->belongsToMany(Image::class);
+    }
 }

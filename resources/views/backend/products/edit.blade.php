@@ -2,6 +2,11 @@
 
 @section('title', 'Categoria')
 
+@section('styles')
+    <!-- Ekko Lightbox -->
+  <link rel="stylesheet" href="{{asset('back/plugins/ekko-lightbox/ekko-lightbox.css')}}">
+@endsection
+
 @section('content')
 
     <section class="content-header">
@@ -41,7 +46,7 @@
                   <h3 class="card-title">Datos del producto actual</h3>
                 </div>
                 <!-- /.card-header -->
-                <form action="{{route('products.update',[$product->id])}}" method="POST">
+                <form action="{{route('products.update',[$product->id])}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method("PUT")
                     <div class="card-body">
@@ -52,6 +57,31 @@
                       <div class="form-group">
                         <label for="description">Descripcion</label>
                         <textarea class="form-control" id="description" name="description" rows="3">{{$product->description}}</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="images">Imagenes</label>
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="images" name="images[]" multiple>
+                          <label class="custom-file-label" for="images">Elegir uno o mas archivos</label>
+                        </div>
+                        <div class="col-12 mt-4">
+                          <div class="card card-primary">
+                            <div class="card-header">
+                              <h4 class="card-title">Imagenes actuales</h4>
+                            </div>
+                            <div class="card-body">
+                              <div class="row">
+                                @foreach ($product->images as $image)
+                                  <div class="col-sm-3">
+                                    <a href="/storage/{{$image->path}}" data-toggle="lightbox" data-title="Imagen producto {{$product->id}}" data-gallery="gallery">
+                                      <img src="/storage/{{$image->path}}" class="img-fluid mb-2"/>
+                                    </a>
+                                  </div>
+                                @endforeach
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div class="form-group">
                         <label for="parent_id">Categoria</label>
@@ -115,5 +145,12 @@
         </div>
         <!-- /.container-fluid -->
     </section>
+
+@endsection
+
+@section('scripts')
+
+  <script src="{{asset('back/plugins/ekko-lightbox/ekko-lightbox.min.js')}}"></script>
+  <script src="{{asset('js/product.js')}}"></script>
 
 @endsection

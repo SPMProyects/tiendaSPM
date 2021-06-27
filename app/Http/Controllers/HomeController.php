@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request; 
 use App\Category;
+use App\Product;
+use App\Image;
 
 class HomeController extends Controller
 {
@@ -26,9 +28,9 @@ class HomeController extends Controller
     {
         //PRUEBAS
         
-        //dump(Category::all()->random(1)->toArray());
-        $category = Category::all()->random(1)->toArray();
-        dump($category[0]['id']);
+        $image = Image::find(5);
+
+        dump($image->products()->detach());
 
         dd();
 

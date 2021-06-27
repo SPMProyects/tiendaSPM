@@ -19,3 +19,4 @@ Route::resource('users', 'UserController');
 Route::resource('currencies', 'CurrencyController');
 Route::resource('categories', 'CategoryController');
 Route::resource('products', 'ProductController');
+Route::resource('images', 'ImageController');

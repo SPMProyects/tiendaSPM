@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Backend\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use App\Image;
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,9 +14,17 @@ class ImageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->has("lista") && $request->input("lista") == "eliminados"){
+            $images = Image::onlyTrashed()->get();
+        }else{
+            $images = Image::all();
+        }
+
+        return view('backend.images.index')->with([
+            'images' => $images,
+        ]);
     }
 
     /**
@@ -25,7 +34,9 @@ class ImageController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.images.create')->with([
+            'products' => Product::all(),
+        ]);
     }
 
     /**
@@ -36,7 +47,25 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'image' => 'required|mimes:jpeg,jpg,png,gif',
+        ]);
+                
+        $complete_name = $request->file('image')->getClientOriginalName();
+
+        $image = Image::create([
+            'path' => $request->file('image')->storeAs('images', $complete_name, 'public')
+        ]);
+        if($request->input('products')){
+            foreach($request->input('products') as $product){
+                $image->products()->attach($product);
+            }
+        }
+        
+        session()->flash('status','La imagen se subió con exito');
+
+        return view('backend.images.index')->with(['images' => Image::all()]);
+
     }
 
     /**
@@ -56,9 +85,12 @@ class ImageController extends Controller
      * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function edit(Image $image)
+    public function edit($id)
     {
-        //
+        return view('backend.images.edit')->with([
+            'products' => Product::all(),
+            'image' => Image::findOrFail($id),
+        ]);
     }
 
     /**
@@ -68,9 +100,22 @@ class ImageController extends Controller
      * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Image $image)
+    public function update(Request $request, $id)
     {
-        //
+        
+        if($request->has('products')){
+            foreach ($request->input('products') as $product) {
+                $images[] = $product;
+            }
+
+            Image::findOrFail($id)->products()->sync($images);
+
+        }
+        
+        session()->flash('status','La imagen se edito con exito');
+        
+        return redirect()->back();
+
     }
 
     /**
@@ -79,8 +124,18 @@ class ImageController extends Controller
      * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Image $image)
+    public function destroy($id)
     {
-        //
+        if(request()->has('eliminar')){
+            Image::withTrashed()->where('id', $id)->first()->forceDelete();
+
+        }else{
+            
+            Image::find($id)->products()->detach();
+            Image::withTrashed()->where('id', $id)->first()->delete();
+            
+        }
+        
+        return redirect()->route('images.index')->with('status','Imagen eliminada correctamente');
     }
 }

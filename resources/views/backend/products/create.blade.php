@@ -36,7 +36,7 @@
                   <h3 class="card-title">Ingresar datos del nuevo producto</h3>
                 </div>
                 <!-- /.card-header -->
-                <form action="{{route('products.store')}}" method="POST">
+                <form action="{{route('products.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method("POST")
                     <div class="card-body">
@@ -47,6 +47,13 @@
                         <div class="form-group">
                           <label for="description">Descripcion</label>
                           <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="images">Imagenes</label>
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="images" name="images[]" multiple>
+                            <label class="custom-file-label" for="images">Elegir uno o mas archivos</label>
+                          </div>
                         </div>
                         <div class="form-group">
                           <label for="parent_id">Categoria</label>

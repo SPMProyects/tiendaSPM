@@ -20,12 +20,16 @@ class DatabaseSeeder extends Seeder
             $category->save();
         });
 
+        factory(App\Image::class, 10)->create();
+
         factory(App\Product::class, 40)->create();
         App\Product::all()->map(function($product){
             $category = App\Category::all()->random(1)->toArray();
             $currency = App\Currency::all()->random(1)->toArray();
+            $image = App\Image::all()->random(1)->toArray();
             $product->category_id = $category[0]['id'];
             $product->currency_id = $currency[0]['id'];
+            $product->images()->attach($image[0]['id']);
             $product->save();
         });
 

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Category;
 use App\Currency;
+use App\Image;
 
 class ProductController extends Controller
 {
@@ -51,6 +53,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|max:50',
             'description' => 'nullable|string|max:250',
@@ -62,7 +65,27 @@ class ProductController extends Controller
             'active' => 'boolean',
         ]);
 
-        Product::create($request->all());
+        $product = Product::create($request->all());
+
+        //Inicio guardado de imágenes
+
+        if($request->hasFile('images')){
+
+            foreach ($request->file('images') as $image) {
+                
+                $complete_name = $image->getClientOriginalName();
+
+                $image = Image::create([
+                    'path' => $image->storeAs('images', $complete_name, 'public')
+                ]);
+                
+                $product->images()->attach($image->id);
+
+            }
+
+        }
+
+        //Fin guardado de imágenes
 
         session()->flash('status','El producto se creo con exito');
 
@@ -115,7 +138,7 @@ class ProductController extends Controller
             'active' => 'boolean',
         ]);
 
-        Product::findOrFail($id)->update($request->except(['featured', 'active']));
+        Product::findOrFail($id)->update($request->except(['featured', 'active', 'images']));
 
         if($request->has('featured') && $request->featured == 1){
             $pro = Product::find($id);
@@ -137,7 +160,32 @@ class ProductController extends Controller
             $pro->save();
         }
 
-        session()->flash('status','el producto se edito con exito');
+        if($request->hasFile('images')){
+
+            $product = Product::find($id);
+
+            foreach ($request->file('images') as $image) {
+           
+                $complete_name = $image->getClientOriginalName();
+
+                $image = Image::create([
+                    'path' => $image->storeAs('images', $complete_name, 'public')
+                ]);
+                
+                $images[] = $image->id;
+
+            }
+
+            foreach ($product->images as $imag) {
+                $url = 'public/' . $imag->path;
+                Storage::delete($url);
+            }
+
+            $product->images()->sync($images);
+
+        }
+
+        session()->flash('status','El producto se edito con exito');
         
         return redirect()->back();
 
