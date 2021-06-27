@@ -12,4 +12,9 @@ class Currency extends Model
     protected $fillable = [
         'name', 'value',
     ];
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
 }

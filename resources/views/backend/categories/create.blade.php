@@ -1,6 +1,6 @@
 @extends('backend.layout.layout')
 
-@section('title', 'Monedas')
+@section('title', 'Categorias')
 
 @section('content')
 
@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Crear moneda</h1>
+                    <h1>Crear categoria</h1>
                 </div>
             </div>
             
@@ -33,10 +33,10 @@
             <div class="col-12">
               <div class="card card-success">
                 <div class="card-header">
-                  <h3 class="card-title">Ingresar datos de la nueva moneda</h3>
+                  <h3 class="card-title">Ingresar datos de la nueva categoria</h3>
                 </div>
                 <!-- /.card-header -->
-                <form action="{{route('currencies.store')}}" method="POST">
+                <form action="{{route('categories.store')}}" method="POST">
                     @csrf
                     @method("POST")
                     <div class="card-body">
@@ -45,8 +45,21 @@
                             <input type="text" class="form-control" id="name" name="name">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Valor</label>
-                            <input type="number" class="form-control" id="value" name="value" step=0.001>
+                          <label for="description">Descripcion</label>
+                          <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="parent_id">Categoria padre</label>
+                          <select class="form-control" id="parent_id" name="parent_id">
+                            <option></option>
+                            @empty(!$categories)
+
+                              @foreach ($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                              @endforeach
+
+                            @endempty
+                          </select>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -66,4 +79,3 @@
     </section>
 
 @endsection
-© 2021 GitHub, Inc.

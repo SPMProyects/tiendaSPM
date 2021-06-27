@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
+use App\Category;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -23,6 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //PRUEBAS
+        
+        //dump(Category::all()->random(1)->toArray());
+        $category = Category::all()->random(1)->toArray();
+        dump($category[0]['id']);
+
+        dd();
+
         return view('home');
     }
 }

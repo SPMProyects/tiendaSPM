@@ -121,13 +121,13 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('categories.index')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Lista</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('categories.create')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Crear</p>
                     </a>
@@ -193,15 +193,15 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('products.index')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Lista</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('products.create')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Subir</p>
+                        <p>Crear</p>
                     </a>
                 </li>
             </ul>

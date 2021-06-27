@@ -64,7 +64,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if($data['admin'] == 'si'){
+        if(isset($data['admin']) && $data['admin'] == 'si'){
             $admin = true;
         }else{
             $admin = false;

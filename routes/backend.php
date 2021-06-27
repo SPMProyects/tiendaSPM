@@ -17,3 +17,5 @@ Route::get('/', 'BackendController@index')->name('backend.index');
 
 Route::resource('users', 'UserController');
 Route::resource('currencies', 'CurrencyController');
+Route::resource('categories', 'CategoryController');
+Route::resource('products', 'ProductController');
