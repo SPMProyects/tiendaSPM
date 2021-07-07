@@ -1,8 +1,11 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/css/orders.css": "/css/orders.css",
     "/js/category.js": "/js/category.js",
     "/js/currency.js": "/js/currency.js",
+    "/js/images.js": "/js/images.js",
+    "/js/orders.js": "/js/orders.js",
     "/js/product.js": "/js/product.js",
     "/js/user.js": "/js/user.js"
 }

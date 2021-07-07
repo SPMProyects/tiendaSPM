@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 use App\Image;
+use App\Order;
 
 class HomeController extends Controller
 {
@@ -27,11 +28,13 @@ class HomeController extends Controller
     public function index()
     {
         //PRUEBAS
+    
         
-        $image = Image::find(5);
-
-        dump($image->products()->detach());
-
+        //session()->forget('quantity');
+        //session()->forget('products');
+        
+        dump(session('products'));
+        dump(session('quantity'));
         dd();
 
         return view('home');

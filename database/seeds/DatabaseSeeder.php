@@ -33,7 +33,23 @@ class DatabaseSeeder extends Seeder
             $product->save();
         });
 
-        
+        factory(App\Order::class, 20)->create();
+        App\Order::all()->map(function($order){
+            $products = App\Product::all()->random(10)->toArray();
+            $user = App\User::all()->random(1)->toArray();
+            $order->user_id = $user[0]['id'];
+            $price = 0;
+            foreach($products as $product){
+                $quantity = rand(0,10);
+                $order->products()->attach($product['id'], [
+                    'price' => $product['price'],
+                    'quantity' => $quantity,
+                ]);
+                $price += ($product['price'] * $quantity);
+            }
+            $order->total = $price;
+            $order->save();
+        });
 
     }
 }

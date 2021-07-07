@@ -1,0 +1,60 @@
+.numbers-row {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    overflow: visible;
+    border: 1px solid #dddddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #fff;
+    text-align: left !important;
+  }
+  
+  input.qty2 {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    left: 50%;
+    background: none;
+    padding: 5px;
+    border: none;
+    margin-left: -20px;
+  }
+  input.qty2:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .button_inc {
+    cursor: pointer;
+    position: absolute;
+    width: 33px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    z-index: 2;
+    font-size: 26px;
+    font-size: 1.625rem;
+    font-weight: 300 !important;
+    color: #999;
+  }
+  .button_inc:hover {
+    color: #004dda;
+  }
+  
+  .dec {
+    left: 0;
+    top: 0;
+  }
+  
+  .inc {
+    right: 0;
+    top: 0;
+  }
+  
+  .table td .numbers-row {
+    background-color: #fff;
+  }

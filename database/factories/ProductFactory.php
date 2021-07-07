@@ -9,8 +9,8 @@ $factory->define(Product::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'description' => $faker->text(25),
-        'price' => $faker->randomFloat(2,0,99999),
-        'sales_price' => $faker->randomFloat(2,0,99999),
+        'price' => $faker->randomFloat(2,0,12000),
+        'sales_price' => $faker->randomFloat(2,0,10000),
         'featured' => $faker->numberBetween(0,1),
         'active' => $faker->numberBetween(0,1),
     ];
