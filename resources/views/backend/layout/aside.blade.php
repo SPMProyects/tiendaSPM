@@ -45,33 +45,39 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('config.general')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Generales</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('config.home')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Pagina Inicio</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">
+                    <a href="{{route('config.company')}}" class="nav-link active">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Pagina Empresa</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('config.chat-rrss-contact')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Chat, RRSS y contacto</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('config.email')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Correo electronico</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('config.popup')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Pop Ups</p>
                     </a>
                 </li>
             </ul>

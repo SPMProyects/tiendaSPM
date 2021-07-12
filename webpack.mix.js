@@ -20,4 +20,5 @@ mix.js('resources/js/back/user.js', 'public/js')
     .js('resources/js/back/product.js', 'public/js')
     .js('resources/js/back/images.js', 'public/js')
     .js('resources/js/back/orders.js', 'public/js')
+    .js('resources/js/back/general.js', 'public/js')
     .sass('resources/sass/orders.scss', 'public/css');
