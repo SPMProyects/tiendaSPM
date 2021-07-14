@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="text_2">Texto del banner 2</label>
-                                    <textarea class="form-control" id="text_2" name="text_2">{{ $home->text_2 ?? ''}}"</textarea>
+                                    <textarea class="form-control" id="text_2" name="text_2">{{ $home->text_2 ?? ''}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="button_2">Texto del boton 2</label>
