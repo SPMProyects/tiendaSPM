@@ -3,6 +3,7 @@
 <head>
     
     @include('backend.layout.head')
+    @include('backend.layout.styles')
     @yield('styles')
 
 </head>

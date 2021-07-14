@@ -7,6 +7,7 @@ use App\Category;
 use App\Product;
 use App\Image;
 use App\Order;
+use App\Configuration;
 
 class HomeController extends Controller
 {
@@ -28,13 +29,9 @@ class HomeController extends Controller
     public function index()
     {
         //PRUEBAS
-    
-        
-        //session()->forget('quantity');
-        //session()->forget('products');
-        
-        dump(session('products'));
-        dump(session('quantity'));
+        $config = Configuration::find(1) ?? '';
+        dump(json_decode($config->general)->store_name);
+
         dd();
 
         return view('home');
