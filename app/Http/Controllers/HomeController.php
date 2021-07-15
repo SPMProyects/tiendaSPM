@@ -29,11 +29,10 @@ class HomeController extends Controller
     public function index()
     {
         //PRUEBAS
-        $config = Configuration::find(1) ?? '';
-        dump(json_decode($config->general)->store_name);
-
+        foreach(getRandomFeatured(8) as $product){
+            dump($product->images()->first()->path);
+        }
         dd();
-
         return view('home');
     }
 }
