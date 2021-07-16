@@ -27,7 +27,7 @@
                         </div>
                         <ul>
                             <li>
-                                <a href="javascript:void(0);">Inicio</a>
+                                <a href="{{route('home')}}">Inicio</a>
                             </li>
                             <li class="submenu">
                                 <a href="javascript:void(0);" class="show-submenu">Tienda</a>
@@ -52,7 +52,7 @@
                                 <a href="javascript:void(0);" class="show-submenu">Contacto</a>
                             </li>
                             <li>
-                                <a href="blog.html">Empresa</a>
+                                <a href="{{route('company')}}">Empresa</a>
                             </li>
                         </ul>
                     </div>

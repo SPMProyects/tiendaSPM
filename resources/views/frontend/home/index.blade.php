@@ -1,5 +1,10 @@
 @extends('frontend.layout.layout')
 
+@section('styles')
+    <!-- SPECIFIC CSS -->
+    <link href="{{asset("front/css/home_1.css")}}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div id="carousel-home">
     <div class="owl-carousel owl-theme">

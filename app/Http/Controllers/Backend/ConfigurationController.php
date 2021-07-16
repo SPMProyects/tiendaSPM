@@ -132,12 +132,16 @@ class ConfigurationController extends Controller
         $company = Configuration::find(1);
 
         $request_array = $request->except('_token', '_method');
-        $request_array['superior_image'] = $this->addAndStore($request, 'superior_image', 'company', $company);
-        $request_array['inferior_image'] = $this->addAndStore($request, 'inferior_image', 'company', $company);
+        $request_array['image_1'] = $this->addAndStore($request, 'image_1', 'company', $company);
+        $request_array['image_2'] = $this->addAndStore($request, 'image_2', 'company', $company);
+        $request_array['image_3'] = $this->addAndStore($request, 'image_3', 'company', $company);
+        $request_array['banner_image'] = $this->addAndStore($request, 'banner_image', 'company', $company);
 
         if($company){
-            $this->verifyAndDeleteImage($request_array, 'superior_image', $company->company);
-            $this->verifyAndDeleteImage($request_array, 'inferior_image', $company->company);
+            $this->verifyAndDeleteImage($request_array, 'image_1', $company->company);
+            $this->verifyAndDeleteImage($request_array, 'image_2', $company->company);
+            $this->verifyAndDeleteImage($request_array, 'image_3', $company->company);
+            $this->verifyAndDeleteImage($request_array, 'banner_image', $company->company);
             $company->company = json_encode($request_array);
             $company->save();
 
