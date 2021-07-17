@@ -120,6 +120,10 @@
                                     <label for="schedule">Horario</label>
                                     <input type="text" class="form-control" id="schedule" name="schedule" value ="{{ $chat_contact_social->schedule ?? ''}}">
                                 </div>
+                                <div class="form-group">
+                                    <label for="schedule">Link Google Maps</label>
+                                    <input type="text" class="form-control" id="maps" name="maps" value ="{{ $chat_contact_social->maps ?? ''}}">
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>

@@ -59,5 +59,4 @@
     </div>
     <!--/bg_white-->
 
-
 @endsection

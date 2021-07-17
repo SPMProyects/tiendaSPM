@@ -49,7 +49,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:void(0);" class="show-submenu">Contacto</a>
+                                <a href="{{route('contact')}}" class="show-submenu">Contacto</a>
                             </li>
                             <li>
                                 <a href="{{route('company')}}">Empresa</a>

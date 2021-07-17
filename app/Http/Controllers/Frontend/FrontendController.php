@@ -22,4 +22,11 @@ class FrontendController extends Controller
             "categories" => Category::all(),
         ]);
     }
+
+    public function contact(){
+        return view('frontend.contact.index')->with([
+            "configurations" => Configuration::find(1) ?? '',
+            "categories" => Category::all(),
+        ]);
+    }
 }
