@@ -29,9 +29,8 @@ class HomeController extends Controller
     public function index()
     {
         //PRUEBAS
-        foreach(getRandomFeatured(8) as $product){
-            dump($product->images()->first()->path);
-        }
+        
+        dump(CountAllProudctInCategory(1));
         dd();
         return view('home');
     }

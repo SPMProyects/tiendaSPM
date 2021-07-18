@@ -30,7 +30,7 @@
                                 <a href="{{route('home')}}">Inicio</a>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);" class="show-submenu">Tienda</a>
+                                <a href="{{route('store')}}" class="show-submenu">Tienda</a>
                                 <ul>
                                     @forelse ($categories as $category)
                                         <li><a href="#" class="{{isset($category->categories) ? 'submenu' : ''}}">{{$category->name}}</a>

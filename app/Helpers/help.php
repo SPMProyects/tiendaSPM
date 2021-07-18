@@ -1,5 +1,6 @@
 <?php
 use App\Product;
+use App\Category;
 
 function getRandomFeatured($number){
     $productsFeatured = Product::where('featured','=',1)->limit($number)->get();
@@ -9,6 +10,23 @@ function getRandomFeatured($number){
 function getRandomSales($number){
     $productsSales = Product::where('sales_price','>',0)->limit($number)->get();
     return $productsSales;
+}
+
+function getCategories($number){
+    $Categories = Category::all()->take($number);
+    return $Categories;
+}
+
+function CountAllProudctInCategory($id){
+    $productsCategory = 0;
+    $category = Category::find($id);
+    $productsCategory += $category->products()->count();
+    if($category->categories()){
+        foreach($category->categories as $sub_category){
+            $productsCategory += $sub_category->products()->count();
+        }
+    }
+    return $productsCategory;
 }
 
 function currencyFormat($monto, $descuento = 0){
