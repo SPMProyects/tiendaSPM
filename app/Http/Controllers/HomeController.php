@@ -30,7 +30,8 @@ class HomeController extends Controller
     {
         //PRUEBAS
         
-        dump(CountAllProudctInCategory(1));
+        $products = Product::find(1)->category->products;
+        dump($products->random(1));
         dd();
         return view('home');
     }

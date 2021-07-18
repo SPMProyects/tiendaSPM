@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Configuration;
 use App\Category;
 use App\Product;
@@ -36,6 +37,14 @@ class FrontendController extends Controller
             "configurations" => Configuration::find(1) ?? '',
             "categories" => Category::all() ?? '',
             "products" => Product::paginate(16) ?? '',
+        ]);
+    }
+
+    public function getProduct(Product $product){
+        return view('frontend.store.product')->with([
+            "configurations" => Configuration::find(1) ?? '',
+            "categories" => Category::all() ?? '',
+            "product" => $product,
         ]);
     }
 }

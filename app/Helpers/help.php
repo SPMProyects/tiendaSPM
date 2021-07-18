@@ -17,6 +17,14 @@ function getCategories($number){
     return $Categories;
 }
 
+function getRandomProducts($productsCollection, $number){
+    if($productsCollection->count() > $number){
+        return $productsCollection->random($number);
+    }else{
+        return $productsCollection->random($productsCollection->count());
+    }
+}
+
 function CountAllProudctInCategory($id){
     $productsCategory = 0;
     $category = Category::find($id);
