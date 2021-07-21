@@ -111,7 +111,7 @@
                     <span class="ribbon off">{{salesFormat($product->sales_price)}}</span>
                 @endif
                 <figure>
-                    <a href="product-detail-1.html">
+                    <a href="{{route('store.product',['product' => $product->id])}}">
 
                         @if ($product->images()->first()->path)
                         <img class="img-fluid lazy" src="/storage/{{$product->images()->first()->path}}" data-src="/storage/{{$product->images()->first()->path}}" alt="">
@@ -128,8 +128,8 @@
                     <span class="new_price">{{currencyFormat($product->price,$product->sales_price)}}</span>
                 </div>
                 <ul>
-                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a></li>
-                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                    <li><a href="#0" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Agregar a favoritos"><i class="ti-heart"></i><span>Agregar a favoritos</span></a></li>
+                    <li><a href="{{route('cart.add',['product' => $product->id])}}" class="tooltip-1" data-toggle="tooltip" data-placement="left" title="Agregar al carrito"><i class="ti-shopping-cart"></i><span>Agregar al carrito</span></a></li>
                 </ul>
             </div>
             <!-- /grid_item -->

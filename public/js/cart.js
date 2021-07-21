@@ -81,74 +81,81 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/back/product.js":
-/*!**************************************!*\
-  !*** ./resources/js/back/product.js ***!
-  \**************************************/
+/***/ "./resources/js/front/cart.js":
+/*!************************************!*\
+  !*** ./resources/js/front/cart.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(function () {
-  if ($('#product_list').length > 0) {
-    $('#product_list').DataTable({
-      "responsive": true,
-      "lengthChange": false,
-      "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print"]
-    }).buttons().container().appendTo('#user_list_wrapper .col-md-6:eq(0)');
+//Formato moneda
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2
+}); //Actualizar cantidad
+
+$(".button_inc").on("click", function () {
+  var $button = $(this);
+  var oldValue = $button.parent().find("input").val();
+
+  if ($button.text() == "+") {
+    var newVal = parseFloat(oldValue) + 1;
+  } else {
+    // Don't allow decrementing below zero
+    if (oldValue > 1) {
+      var newVal = parseFloat(oldValue) - 1;
+    } else {
+      newVal = 0;
+    }
   }
 
-  $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-    event.preventDefault();
-    $(this).ekkoLightbox({
-      alwaysShowClose: true
-    });
+  var id = $button.siblings('input').attr("product-id");
+  var quantity = $button.siblings('input').val();
+
+  var _token = $('input[name=_token]').val();
+
+  $.post("/cart/updateQuantity", {
+    id_product: id,
+    quantity_product: quantity,
+    _token: _token
+  }, function (data, status) {
+    //Poner los valores devueltos (Quantity, Subtotal Product, Subtotal y Total) en donde corresponda
+    $button.parent('div').parent('td').siblings('td').find('.subtotal').text(formatter.format(JSON.parse(data).subtotal_product));
+    $('#subtotal').text(formatter.format(JSON.parse(data).subtotal_cart));
+    $('#total').text(formatter.format(JSON.parse(data).total_cart));
+    $('#cart_quantity').text(JSON.parse(data).cart_quantity);
+  });
+}); //Eliminar un producto del carrito
+
+$('.btn-eliminar').on('click', function (e) {
+  e.preventDefault();
+  var id_product = $(this).attr('product-id');
+
+  var _token = $('input[name=_token]').val();
+
+  $.get("/cart/remove/" + id_product, {
+    _token: _token
+  }, function (data, status) {
+    location.reload();
   });
 });
 
 /***/ }),
 
-/***/ "./resources/js/front/product.js":
-/*!***************************************!*\
-  !*** ./resources/js/front/product.js ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(function () {
-  $('#btn-agregar').on('click', function (e) {
-    //Enviar por ajax hacia un método del controlador que agregue los productos (Mediante su ID enviado por el array products) a una session que rellene la datatable de productos agregados
-    e.preventDefault();
-    var id_product = $(this).attr('product-id');
-    var quantity_product = $('#quantity_1').val();
-
-    var _token = $('input[name=_token]').val();
-
-    $.get("/cart/" + id_product, {
-      quantity: quantity_product,
-      _token: _token
-    }, function (data, status) {
-      location.reload();
-    });
-  });
-});
-
-/***/ }),
-
-/***/ 4:
-/*!****************************************************************************!*\
-  !*** multi ./resources/js/back/product.js ./resources/js/front/product.js ***!
-  \****************************************************************************/
+/***/ 8:
+/*!******************************************!*\
+  !*** multi ./resources/js/front/cart.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xamp\htdocs\tiendaSPM\resources\js\back\product.js */"./resources/js/back/product.js");
-module.exports = __webpack_require__(/*! D:\xamp\htdocs\tiendaSPM\resources\js\front\product.js */"./resources/js/front/product.js");
+module.exports = __webpack_require__(/*! D:\xamp\htdocs\tiendaSPM\resources\js\front\cart.js */"./resources/js/front/cart.js");
 
 
 /***/ })

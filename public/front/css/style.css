@@ -3366,13 +3366,13 @@ header.version_2 .menu ul li ul li ul {
 
 /*-------- 1.5 Top banner --------*/
 .top_banner {
-  height: 250px;
+  height: 100px;
   overflow: hidden;
   position: relative;
 }
 @media (max-width: 767px) {
   .top_banner {
-    height: 200px;
+    height: 125px;
   }
 }
 .top_banner .breadcrumbs {

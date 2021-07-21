@@ -47,4 +47,12 @@ class FrontendController extends Controller
             "product" => $product,
         ]);
     }
+
+    public function getCategory(Category $category){
+        return view('frontend.store.category')->with([
+            "configurations" => Configuration::find(1) ?? '',
+            "categories" => Category::all() ?? '',
+            "category" => $category,
+        ]);
+    }
 }

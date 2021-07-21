@@ -9,7 +9,7 @@
 
     <div class="container margin_30">
         @if ($product->sales_price)
-            <div class="countdown_inner">{{salesFormat($product->sales_price)}} PRODUCTO EN OFERTA - APROVECHA</div>
+            <div class="countdown_inner">{{salesFormat($product->sales_price)}} DE DESCENTO - PRODUCTO EN OFERTA - APROVECHA</div>
         @endif
         </div>
         <div class="row">
@@ -42,9 +42,9 @@
             <div class="col-md-6">
                 <div class="breadcrumbs">
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li>Page active</li>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">{{$product->category->name}}</a></li>
+                        <li>{{$product->name}}</li>
                     </ul>
                 </div>
                 <!-- /page_header -->
@@ -71,7 +71,8 @@
                                 @endif
                         </div>
                         <div class="col-lg-4 col-md-6">
-                            <div class="btn_add_to_cart"><a href="#0" class="btn_1">Agregar al carrito</a></div>
+                            @csrf
+                            <div class="btn_add_to_cart"><a href="#0" class="btn_1" id="btn-agregar" product-id="{{$product->id}}">Agregar al carrito</a></div>
                         </div>
                     </div>
                 </div>
@@ -225,4 +226,5 @@
 
 @section('scripts')
     <script src="{{asset("front/js/carousel_with_thumbs.js")}}"></script>
+    <script src="{{asset('js/product.js')}}"></script>
 @endsection

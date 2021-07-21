@@ -78,70 +78,81 @@
                     <ul class="top_tools">
                         <li>
                             <div class="dropdown dropdown-cart">
-                                <a href="cart.html" class="cart_bt"><strong>2</strong></a>
+                                <a href="cart.html" class="cart_bt"><strong id="cart_quantity">{{Auth::check() ? Cart::session(auth()->user()->id)->getTotalQuantity() : 0}}</strong></a>
                                 <div class="dropdown-menu">
-                                    <ul>
-                                        <li>
-                                            <a href="product-detail-1.html">
-                                                <figure><img src="{{asset("front/img/products/product_placeholder_square_small.jpg")}}" data-src="{{asset("front/img/products/shoes/thumb/1.jpg")}}" alt="" width="50" height="50" class="lazy"></figure>
-                                                <strong><span>1x Armor Air x Fear</span>$90.00</strong>
-                                            </a>
-                                            <a href="#0" class="action"><i class="ti-trash"></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="product-detail-1.html">
-                                                <figure><img src="{{asset("front/img/products/product_placeholder_square_small.jpg")}}" data-src="{{asset("front/img/products/shoes/thumb/2.jpg")}}" alt="" width="50" height="50" class="lazy"></figure>
-                                                <strong><span>1x Armor Okwahn II</span>$110.00</strong>
-                                            </a>
-                                            <a href="0" class="action"><i class="ti-trash"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="total_drop">
-                                        <div class="clearfix"><strong>Total</strong><span>$200.00</span></div>
-                                        <a href="cart.html" class="btn_1 outline">View Cart</a><a href="checkout.html" class="btn_1">Checkout</a>
-                                    </div>
+                                    @if (Auth::check())
+                                        <ul>
+                                                @forelse (\Cart::session(auth()->user()->id)->getContent() as $product)
+                                                <li>
+                                                    <a href="product-detail-1.html">
+                                                        <figure><img src="/storage/{{$product->associatedModel->images()->first()->path}}" data-src="/storage/{{$product->associatedModel->images()->first()->path}}" alt="" width="50" height="50" class="lazy"></figure>
+                                                        <strong><span>{{$product->name}}</span>{{currencyFormat($product->price,$product->sales_price)}} x {{$product->quantity}}</strong>
+                                                    </a>
+                                                    <a href="{{route('cart.remove',['product' => $product->id])}}" class="action"><i class="ti-trash"></i></a>
+                                                </li>
+                                                @empty
+                                                    <li>Carrito vacio</li>
+                                                @endforelse
+                                        </ul>
+                                        <div class="total_drop">
+                                            <div class="clearfix"><strong>Total</strong><span>{{Auth::check() ? currencyFormat(\Cart::session(auth()->user()->id)->getTotal()) : 0}}</span></div>
+                                            <a href="{{route('cart.index')}}" class="btn_1 outline">Ver carrito</a><a href="checkout.html" class="btn_1">Confirmar pedido</a>
+                                        </div>
+                                    @else
+                                        <ul>
+                                            <li>Debes estar reigstrado para comprar</li>
+                                        </ul>
+                                    @endif
                                 </div>
                             </div>
                             <!-- /dropdown-cart-->
                         </li>
                         <li>
-                            <a href="#0" class="wishlist"><span>Wishlist</span></a>
+                            <div class="dropdown dropdown-cart">
+                            <a href="#0" class="wishlist dropdown"><span>Lista de deseos</span></a>
+                                <div class="dropdown-menu">
+                                    @if (Auth::check())
+
+                                    @else
+                                        <ul>
+                                            <li>Debes estar registrado para agregar productos a tu lista de favoritos</li>
+                                        </ul>
+                                    @endif
+                                </div>
+                            </div>
                         </li>
                         <li>
                             <div class="dropdown dropdown-access">
-                                <a href="account.html" class="access_link"><span>Account</span></a>
+                                <a href="#" class="access_link"><span>Cuenta de usuario</span></a>
                                 <div class="dropdown-menu">
-                                    <a href="account.html" class="btn_1">Sign In or Sign Up</a>
-                                    <ul>
-                                        <li>
-                                            <a href="track-order.html"><i class="ti-truck"></i>Track your Order</a>
-                                        </li>
-                                        <li>
-                                            <a href="account.html"><i class="ti-package"></i>My Orders</a>
-                                        </li>
-                                        <li>
-                                            <a href="account.html"><i class="ti-user"></i>My Profile</a>
-                                        </li>
-                                        <li>
-                                            <a href="help.html"><i class="ti-help-alt"></i>Help and Faq</a>
-                                        </li>
-                                    </ul>
+                                    @if (Auth::check())
+                                        <ul>
+                                            <li>
+                                                <a href="account.html"><i class="ti-package"></i>Mis pedidos</a>
+                                            </li>
+                                            <li>
+                                                <a href="account.html"><i class="ti-user"></i>Mis Datos</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                                        <i class="ti-lock"></i>Cerrar sesion
+                                                </a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                    @csrf
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    @else
+                                        <a href="account.html" class="btn_1">Ingresar</a>
+                                    @endif
                                 </div>
                             </div>
                             <!-- /dropdown-access-->
                         </li>
                         <li>
                             <a href="javascript:void(0);" class="btn_search_mob"><span>Search</span></a>
-                        </li>
-                        <li>
-                            <a href="#menu" class="btn_cat_mob">
-                                <div class="hamburger hamburger--spin" id="hamburger">
-                                    <div class="hamburger-box">
-                                        <div class="hamburger-inner"></div>
-                                    </div>
-                                </div>
-                                Categories
-                            </a>
                         </li>
                     </ul>
                 </div>
