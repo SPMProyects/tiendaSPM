@@ -14,3 +14,8 @@ Route::get('/cart/{product}', 'CartController@addProduct')->name('cart.add');
 Route::post('/cart/updateQuantity', 'CartController@updateQuantity')->name('cart.update');
 Route::get('/cart/remove/{product}', 'CartController@removeProduct')->name('cart.remove');
 
+Route::get('/user','UserController@personalInformation')->name('user.information');
+Route::post('/user/edit','UserController@editPersonalInformation')->name('user.information.edit');
+Route::get('/user/orders','UserController@myOrders')->name('user.orders');
+Route::get('/user/order/{order}','UserController@orderDetails')->name('user.order.detail');
+

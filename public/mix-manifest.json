@@ -9,5 +9,6 @@
     "/js/images.js": "/js/images.js",
     "/js/orders.js": "/js/orders.js",
     "/js/product.js": "/js/product.js",
-    "/js/user.js": "/js/user.js"
+    "/js/user.js": "/js/user.js",
+    "/js/user_order.js": "/js/user_order.js"
 }

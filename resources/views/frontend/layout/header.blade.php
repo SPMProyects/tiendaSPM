@@ -128,10 +128,10 @@
                                     @if (Auth::check())
                                         <ul>
                                             <li>
-                                                <a href="account.html"><i class="ti-package"></i>Mis pedidos</a>
+                                                <a href="{{route('user.orders')}}"><i class="ti-package"></i>Mis pedidos</a>
                                             </li>
                                             <li>
-                                                <a href="account.html"><i class="ti-user"></i>Mis Datos</a>
+                                                <a href="{{route('user.information')}}"><i class="ti-user"></i>Mis Datos</a>
                                             </li>
                                             <li>
                                                 <a href="{{ route('logout') }}"

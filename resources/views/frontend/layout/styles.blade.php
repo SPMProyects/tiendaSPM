@@ -3,4 +3,5 @@
 
 <!-- BASE CSS -->
 <link href="{{asset("front/css/bootstrap.custom.min.css")}}" rel="stylesheet">
+<link href="{{asset("front/css/bootstrap.min.css")}}" rel="stylesheet">
 <link href="{{asset("front/css/style.css")}}" rel="stylesheet">
