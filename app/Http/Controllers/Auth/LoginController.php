@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Configuration;
+use App\Category;
 
 class LoginController extends Controller
 {
@@ -41,6 +43,14 @@ class LoginController extends Controller
 
     protected function loggedOut(Request $request) {
         return redirect()->route('home');
+    }
+    
+    public function showLoginForm()
+    {
+        return view('frontend.user.login')->with([
+            "configurations" => Configuration::find(1) ?? '',
+            "categories" => Category::all() ?? '',
+        ]);
     }
     
 }

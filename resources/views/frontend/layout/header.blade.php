@@ -145,7 +145,7 @@
                                             </li>
                                         </ul>
                                     @else
-                                        <a href="account.html" class="btn_1">Ingresar</a>
+                                        <a href="{{route('login')}}" class="btn_1">Ingresar</a>
                                     @endif
                                 </div>
                             </div>
