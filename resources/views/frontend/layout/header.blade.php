@@ -127,6 +127,12 @@
                                 <div class="dropdown-menu">
                                     @if (Auth::check())
                                         <ul>
+                                            @if (auth()->check() && auth()->user()->admin == 1)
+                                                <li>
+                                                    <a href="{{route('backend.index')}}" class="badge badge-primary"><i class="ti-server"></i>Backend</a>
+                                                </li>
+                                            @endif
+
                                             <li>
                                                 <a href="{{route('user.orders')}}"><i class="ti-package"></i>Mis pedidos</a>
                                             </li>
