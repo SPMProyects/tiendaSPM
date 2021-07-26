@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Configuration;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewUser;
 
 class UserController extends Controller
 {
@@ -57,6 +59,14 @@ class UserController extends Controller
         User::create($request->only('name','email','address','admin') + ['password' => bcrypt($request->input('password'))]);
 
         session()->flash('status','El usuario se creo con exito');
+
+
+        $data =[
+            'name' => $request->name,
+            'email' => json_decode(Configuration::findOrFail(1)->email_server)->sender,
+        ];
+
+        Mail::to($request->email)->queue(new NewUser($data));
 
         return view('backend.users.index')->with(['users' => User::all()]);
     }

@@ -49,7 +49,7 @@
                                     <input type="text" class="form-control" id="store_name" name="store_name" value ="{{ $general->store_name ?? ''}}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Color de la tienda</label>
+                                    <label>Color de la tienda 1</label>
                 
                                     <div class="input-group my-colorpicker2">
                                         <input type="text" class="form-control" name="color" id="color" value ="{{ $general->color ?? ''}}">
@@ -58,7 +58,28 @@
                                             <span class="input-group-text"><i class="fas fa-square"></i></span>
                                         </div>
                                     </div>
-                                    <!-- /.input group -->
+                                </div>
+                                <div class="form-group">
+                                    <label>Color de la tienda 2</label>
+                
+                                    <div class="input-group my-colorpicker2">
+                                        <input type="text" class="form-control" name="color_2" id="color_2" value ="{{ $general->color_2 ?? ''}}">
+                    
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Color de la tienda 3</label>
+                
+                                    <div class="input-group my-colorpicker2">
+                                        <input type="text" class="form-control" name="color_3" id="color_3" value ="{{ $general->color_3 ?? ''}}">
+                    
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="icon">Logo</label>
