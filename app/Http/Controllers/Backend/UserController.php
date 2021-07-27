@@ -60,7 +60,6 @@ class UserController extends Controller
 
         session()->flash('status','El usuario se creo con exito');
 
-
         $data =[
             'name' => $request->name,
             'email' => json_decode(Configuration::findOrFail(1)->email_server)->sender,

@@ -19,8 +19,6 @@
                     <!-- Mobile menu button -->
                     <div class="main-menu">
                         <div id="header_menu">
-                            
-                            {{-- Falta que tome el icono de forma automática desde la tabla de config --}}
 
                             <a href="index.html"><img src="{{asset("front/img/logo_black.svg")}}" alt="" width="100" height="35"></a>
                             <a href="#" class="open_close" id="close_in"><i class="ti-close"></i></a>

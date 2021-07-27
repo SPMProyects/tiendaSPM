@@ -26,22 +26,32 @@
         </div>
         <div class="col-lg-6">
             <h3 class="pb-3">Escribinos</h3>
-            <form action="" method="POST">
+            <form action="{{route('contact.send')}}" method="POST">
                 @csrf
                 @method("POST")
                 <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Nombre">
+                    <input class="form-control" type="text" placeholder="Nombre" name="name">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="email" placeholder="Correo electrónico">
+                    <input class="form-control" type="email" placeholder="Correo electrónico" name="email">
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" style="height: 150px;" placeholder="Mensaje"></textarea>
+                    <input class="form-control" type="text" placeholder="Asunto" name="subject">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" style="height: 150px;" placeholder="Mensaje" name="message"></textarea>
                 </div>
                 <div class="form-group">
                     <input class="btn_1 full-width" type="submit" value="Enviar">
                 </div>
             </form>
+            @if (session()->has('status'))
+                <div class="row">
+                    <div class="alert alert-success col-12">
+                        {{session()->get('status')}}
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
     <!-- /row -->				

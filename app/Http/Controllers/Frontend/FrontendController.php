@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Configuration;
 use App\Category;
+use App\Mail\Contact;
 use App\Product;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -54,5 +56,27 @@ class FrontendController extends Controller
             "categories" => Category::all() ?? '',
             "category" => $category,
         ]);
+    }
+
+    public function sendMessage(Request $request){
+
+        $configurations = Configuration::first();
+        
+        $data =[
+            'email' => json_decode($configurations->email_server)->sender,
+        ];
+
+        if(json_decode($configurations->email_server)->email_manager1){
+            Mail::to(json_decode($configurations->email_server)->email_manager1)->queue(new Contact($request->all(), $data));
+        };
+
+        if($mail = json_decode($configurations->email_server)->email_manager2){
+            Mail::to(json_decode($configurations->email_server)->email_manager2)->queue(new Contact($request->all(), $data));
+        };
+
+        session()->flash('status','El mensaje se envió correctamente');
+
+        return redirect()->back();
+
     }
 }

@@ -31,6 +31,10 @@ class HomeController extends Controller
     public function index()
     {
         //PRUEBAS
+
+        dump(Configuration::first());
+        dump(json_decode(Configuration::first()->general)->icon);
+        /*
         $user =[
             'name' => 'Santiago',
             'email' => 'santiago@santiago.com',
@@ -41,6 +45,8 @@ class HomeController extends Controller
         //return new NewUser($user);
 
         return 'Mensaje enviado';
+        */
+
 
         //$configurations = Configuration::first();
         //dump($configurations->general);
