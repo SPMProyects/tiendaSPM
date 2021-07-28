@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Configuration;
 use App\Category;
+use App\Mail\NewOrder;
+use App\Order;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -79,7 +83,45 @@ class CartController extends Controller
     }
 
     public function confirmCart(){
+        
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'total' => \Cart::session(Auth::id())->getTotal(),
+        ]);
 
+        foreach (\Cart::session(Auth::id())->getContent()->sortKeys() as $cartItem) {
+
+            $order->products()->attach($cartItem->id, [
+                'price' => $cartItem->price,
+                'quantity' => $cartItem->quantity,
+            ]);
+
+        }
+
+        $order->save();
+
+        $configurations = Configuration::first();
+        
+        $data = [
+            'name' => auth()->user()->name,
+            'email' => json_decode(Configuration::findOrFail(1)->email_server)->sender,
+        ];
+
+        
+        //Enviar correo al usuario con el detalle de la orden al usuario y a los administradores
+        Mail::to(auth()->user()->email)->queue(new NewOrder($data));
+
+        if(json_decode($configurations->email_server)->email_manager1){
+            Mail::to(json_decode($configurations->email_server)->email_manager1)->queue(new NewOrder($data));
+        };
+
+        if(json_decode($configurations->email_server)->email_manager2){
+            Mail::to(json_decode($configurations->email_server)->email_manager2)->queue(new NewOrder($data));
+        };
+
+        \Cart::session(Auth::id())->clear();
+
+        return redirect()->back();
     }
 
 }

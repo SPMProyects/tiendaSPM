@@ -18,6 +18,7 @@ Route::middleware(['auth',])->group(function () {
     Route::get('/cart/{product}', 'CartController@addProduct')->name('cart.add');
     Route::post('/cart/updateQuantity', 'CartController@updateQuantity')->name('cart.update');
     Route::get('/cart/remove/{product}', 'CartController@removeProduct')->name('cart.remove');
+    Route::get('/confirm', 'CartController@confirmCart')->name('cart.confirm');
 
     Route::get('/user','UserController@personalInformation')->name('user.information');
     Route::post('/user/edit','UserController@editPersonalInformation')->name('user.information.edit');

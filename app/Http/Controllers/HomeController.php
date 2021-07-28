@@ -9,6 +9,7 @@ use App\Image;
 use App\Order;
 use App\Configuration;
 use App\Mail\NewUser;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -31,26 +32,10 @@ class HomeController extends Controller
     public function index()
     {
         //PRUEBAS
-
-        dump(Configuration::first());
-        dump(json_decode(Configuration::first()->general)->icon);
-        /*
-        $user =[
-            'name' => 'Santiago',
-            'email' => 'santiago@santiago.com',
-        ];
-
-        Mail::to('santiagopereyra2702@gmail.com')->queue(new NewUser($user));
-
-        //return new NewUser($user);
-
-        return 'Mensaje enviado';
-        */
-
-
-        //$configurations = Configuration::first();
-        //dump($configurations->general);
-        //dump(json_decode($configurations->general)->store_name);
+        
+        dump(\Cart::session(Auth::id())->getContent()->sortKeys());
+        
+        
 
         dd();
         //return view('home');

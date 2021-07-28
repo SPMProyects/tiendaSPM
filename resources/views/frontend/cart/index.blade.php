@@ -83,17 +83,17 @@
 
 <div class="box_cart">
     <div class="container">
-    <div class="row justify-content-end">
-        <div class="col-xl-4 col-lg-4 col-md-6">
-    <ul>
-        <li>
-            <span>Subtotal</span> <p id="subtotal">{{currencyFormat(\Cart::session($userId)->getSubTotal() ?? '')}}</p>
-        </li>
-        <li>
-            <span>Total</span> <p id="total">{{currencyFormat(\Cart::session($userId)->getTotal() ?? '')}}</p>
-        </li>
-    </ul>
-    <a href="cart-2.html" class="btn_1 full-width cart">Confirmar pedido</a>
+        <div class="row justify-content-end">
+            <div class="col-xl-4 col-lg-4 col-md-6">
+                <ul>
+                    <li>
+                        <span>Subtotal</span> <p id="subtotal">{{currencyFormat(\Cart::session($userId)->getSubTotal() ?? '')}}</p>
+                    </li>
+                    <li>
+                        <span>Total</span> <p id="total">{{currencyFormat(\Cart::session($userId)->getTotal() ?? '')}}</p>
+                    </li>
+                </ul>
+                <a href="{{route('cart.confirm')}}" class="btn_1 full-width cart">Confirmar pedido</a>
             </div>
         </div>
     </div>
