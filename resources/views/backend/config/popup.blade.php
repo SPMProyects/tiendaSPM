@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="link_1">Link del popup 1</label>
-                                    <input type="text" class="form-control" id="link_1" name="link_1" value ="{{ $popup->linktitle_1 ?? ''}}">
+                                    <input type="text" class="form-control" id="link_1" name="link_1" value ="{{ $popup->link_1 ?? ''}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="icon">Imagen 1</label>

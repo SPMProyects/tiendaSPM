@@ -4,3 +4,6 @@
 
 <!-- SPECIFIC SCRIPTS -->
 <script src="{{asset("front/js/carousel-home.min.js")}}"></script>
+
+<!-- MODAL JS -->
+<script src="{{asset("js/modal.js")}}"></script>

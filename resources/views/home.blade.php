@@ -15,9 +15,16 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#prueba">
+                        Launch static backdrop modal
+                    </button>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+<x-Modal id="prueba" title="{{getConfig('popup','title_1')}}" text="{{getConfig('popup','text_1')}}" buttonText="{{getConfig('popup','button_1')}}" buttonLink="{{getConfig('popup','link_1')}}" image="{{asset('/storage/' . getConfig('popup','image_1'))}}"/>

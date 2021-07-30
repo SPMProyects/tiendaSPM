@@ -32,12 +32,9 @@ class HomeController extends Controller
     public function index()
     {
         //PRUEBAS
-        
-        dump(\Cart::session(Auth::id())->getContent()->sortKeys());
-        
-        
 
-        dd();
-        //return view('home');
+        //dd();
+
+        return view('home');
     }
 }

@@ -49,3 +49,15 @@
         </div>
     </div>
 </footer>
+
+@if (getConfig('popup','title_1') != '')
+    <x-Modal id="modal1" title="{{getConfig('popup','title_1')}}" text="{{getConfig('popup','text_1')}}" buttonText="{{getConfig('popup','button_1')}}" buttonLink="{{getConfig('popup','link_1')}}" image="{{asset('/storage/' . getConfig('popup','image_1'))}}"/>
+@endif
+
+@if (getConfig('popup','title_2') != '')
+    <x-Modal id="modal2" title="{{getConfig('popup','title_2')}}" text="{{getConfig('popup','text_2')}}" buttonText="{{getConfig('popup','button_2')}}" buttonLink="{{getConfig('popup','link_2')}}" image="{{asset('/storage/' . getConfig('popup','image_2'))}}"/>
+@endif
+
+@if (getConfig('popup','title_3') != '')
+    <x-Modal id="modal3" title="{{getConfig('popup','title_3')}}" text="{{getConfig('popup','text_3')}}" buttonText="{{getConfig('popup','button_3')}}" buttonLink="{{getConfig('popup','link_3')}}" image="{{asset('/storage/' . getConfig('popup','image_3'))}}"/>
+@endif

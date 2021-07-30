@@ -1,6 +1,7 @@
 <?php
 use App\Product;
 use App\Category;
+use App\Configuration;
 
 function getRandomFeatured($number){
     $productsFeatured = Product::where('featured','=',1)->limit($number)->get();
@@ -48,4 +49,14 @@ function currencyFormat($monto, $descuento = 0){
 
 function salesFormat($descuento){
     return "-" . number_format($descuento) . "%";
+}
+
+function getConfig($column, $field){
+    $configurations = Configuration::find(1) ?? '';
+    if($configurations != ''){
+        return json_decode($configurations->$column)->$field;
+    }else{
+        return '';
+    }
+    
 }
