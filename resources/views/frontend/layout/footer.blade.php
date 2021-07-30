@@ -50,6 +50,23 @@
     </div>
 </footer>
 
+@if (in_array(1,getConfig('chat_contact_social','chats')))
+    <a href="{{getConfig('chat_contact_social','link_wsp')}}" class="whatsapp" target="_blank"> <i class="fa fa-whatsapp whatsapp-icon"></i></a>
+@endif
+@if (in_array(2,getConfig('chat_contact_social','chats')))
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src= {!!getConfig('chat_contact_social','link_tawk')!!};
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+@endif
+
 @if (getConfig('popup','title_1') != '')
     <x-Modal id="modal1" title="{{getConfig('popup','title_1')}}" text="{{getConfig('popup','text_1')}}" buttonText="{{getConfig('popup','button_1')}}" buttonLink="{{getConfig('popup','link_1')}}" image="{{asset('/storage/' . getConfig('popup','image_1'))}}"/>
 @endif

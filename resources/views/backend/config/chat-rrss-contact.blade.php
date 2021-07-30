@@ -47,12 +47,16 @@
                                     </div>
                                     <div class="icheck-success">
                                         <input type="checkbox" id="chat_2" name="chats[]" value="2" {{ $configuration::verifyChat('2') }}>
-                                        <label for="chat_2">Facebook</label>
+                                        <label for="chat_2">Tawk.To</label>
                                     </div>
-                                    <div class="icheck-success">
-                                        <input type="checkbox" id="chat_3" name="chats[]" value="3" {{ $configuration::verifyChat('3') }}>
-                                        <label for="chat_3">Tawk.To</label>
-                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="facebook">Link Whatsapp</label>
+                                    <input type="text" class="form-control" id="link_wsp" name="link_wsp" value ="{{ $chat_contact_social->link_wsp ?? ''}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="facebook">Link Tawk.to</label>
+                                    <input type="text" class="form-control" id="link_tawk" name="link_tawk" value ="{{ $chat_contact_social->link_tawk ?? ''}}">
                                 </div>
                             </div>
                             <!-- /.card-body -->
