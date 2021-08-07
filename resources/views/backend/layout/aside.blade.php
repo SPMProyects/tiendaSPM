@@ -114,6 +114,12 @@
                         <p>Crear</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('users.export-import')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Exportar - Importar</p>
+                    </a>
+                </li>
             </ul>
         </li>
         <li class="nav-item">
@@ -138,6 +144,12 @@
                         <p>Crear</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('categories.export-import')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Exportar - Importar</p>
+                    </a>
+                </li>
             </ul>
         </li>
         <li class="nav-item">
@@ -160,6 +172,12 @@
                     <a href="{{route('currencies.create')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Crear</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('currencies.export-import')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Exportar - Importar</p>
                     </a>
                 </li>
             </ul>
@@ -208,6 +226,12 @@
                     <a href="{{route('products.create')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Crear</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('products.export-import')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Exportar - Importar</p>
                     </a>
                 </li>
             </ul>

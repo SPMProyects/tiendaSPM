@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Currency;
+use App\Exports\CurrenciesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class CurrencyController extends Controller
 {
@@ -115,4 +118,19 @@ class CurrencyController extends Controller
         
         return redirect()->route('currencies.index')->with('status','Moneda eliminada correctamente');
     }
+
+    public function exportImport(){
+        return view('backend.currencies.export-import');
+    }
+
+    public function export(){
+        
+        return Excel::download(new CurrenciesExport, 'currencies-list.xlsx');
+
+    }
+
+    public function import(){
+        
+    }
+    
 }

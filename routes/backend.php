@@ -7,9 +7,25 @@ Route::middleware(['admin',])->group(function () {
 
     //Principal Routes
     Route::resource('users', 'UserController');
+    Route::get('user/export-import','UserController@exportImport')->name('users.export-import');
+    Route::get('user/export','UserController@export')->name('users.export');
+    Route::get('user/import','UserController@import')->name('users.import');
+
     Route::resource('currencies', 'CurrencyController');
+    Route::get('currency/export-import','CurrencyController@exportImport')->name('currencies.export-import');
+    Route::get('currency/export','CurrencyController@export')->name('currencies.export');
+    Route::get('currency/import','CurrencyController@import')->name('currencies.import');
+
     Route::resource('categories', 'CategoryController');
+    Route::get('category/export-import','CategoryController@exportImport')->name('categories.export-import');
+    Route::get('category/export','CategoryController@export')->name('categories.export');
+    Route::get('category/import','CategoryController@import')->name('categories.import');
+
     Route::resource('products', 'ProductController');
+    Route::get('product/export-import','ProductController@exportImport')->name('products.export-import');
+    Route::get('product/export','ProductController@export')->name('products.export');
+    Route::get('product/import','ProductController@import')->name('products.import');
+
     Route::resource('images', 'ImageController');
 
     //Order Routes

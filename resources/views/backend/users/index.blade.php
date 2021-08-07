@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Lista de usuarios</h1>
+                    <h1>Lista de Usuarios</h1>
                 </div>
                 <div class="col-sm-6 text-right">
                     @if (request()->has('lista') && request()->input('lista') == 'eliminados')

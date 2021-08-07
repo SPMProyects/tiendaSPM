@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use App\Exports\CategoriesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
@@ -123,4 +125,19 @@ class CategoryController extends Controller
         
         return redirect()->route('categories.index')->with('status','Categoria eliminada correctamente');
     }
+
+    public function exportImport(){
+        return view('backend.categories.export-import');
+    }
+
+    public function export(){
+        
+        return Excel::download(new CategoriesExport, 'category-list.xlsx');
+
+    }
+
+    public function import(){
+        
+    }
+
 }

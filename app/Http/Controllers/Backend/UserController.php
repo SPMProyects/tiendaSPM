@@ -8,6 +8,8 @@ use App\User;
 use App\Configuration;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewUser;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -138,5 +140,19 @@ class UserController extends Controller
         
         return redirect()->route('users.index')->with('status','Usuario eliminado correctamente');
 
+    }
+
+    public function exportImport(){
+        return view('backend.users.export-import');
+    }
+
+    public function export(){
+        
+        return Excel::download(new UsersExport, 'user-list.xlsx');
+
+    }
+
+    public function import(){
+        
     }
 }

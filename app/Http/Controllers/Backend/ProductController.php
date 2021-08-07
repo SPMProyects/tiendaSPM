@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 use App\Category;
 use App\Currency;
 use App\Image;
+use App\Exports\ProductsExport;
+use App\Exports\ImagesExport;
+use App\Exports\ImagesProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Spm\Zipper\Facades\Zipper;
+
 
 class ProductController extends Controller
 {
@@ -207,4 +213,38 @@ class ProductController extends Controller
         
         return redirect()->route('products.index')->with('status','Producto eliminado correctamente');
     }
+
+    public function exportImport(){
+        return view('backend.products.export-import');
+    }
+
+    public function export(){
+
+        Excel::store(new ProductsExport, '\exports\products\products-list.xlsx');
+        Excel::store(new ImagesExport, '\exports\products\images-list.xlsx');
+        Excel::store(new ImagesProductsExport, '\exports\products\products-images-list.xlsx');
+
+        //dump(storage_path('app\exports\products'));
+        //dd();
+
+        $folders_to_zip = [
+            public_path() . '\storage\images',
+            storage_path('app\exports\products'),
+        ];
+
+        $zip_file_name = public_path() . '\exports\products\products.zip';
+
+        Zipper::setZipFileName($zip_file_name);
+        Zipper::setFoldersToZip($folders_to_zip);
+        Zipper::makeZip();
+
+        return response()->download($zip_file_name)->deleteFileAfterSend();
+
+    }
+
+    public function import(){
+        
+    }
+    
+
 }
