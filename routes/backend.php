@@ -27,6 +27,9 @@ Route::middleware(['admin',])->group(function () {
     Route::get('product/import','ProductController@import')->name('products.import');
 
     Route::resource('images', 'ImageController');
+    Route::get('image/export-import','ImageController@exportImport')->name('images.export-import');
+    Route::get('image/export','ImageController@export')->name('images.export');
+    Route::get('image/import','ImageController@import')->name('images.import');
 
     //Order Routes
     Route::resource('orders', 'OrderController');

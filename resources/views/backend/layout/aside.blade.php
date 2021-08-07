@@ -204,6 +204,12 @@
                         <p>Subir</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('images.export-import')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Exportar - Importar</p>
+                    </a>
+                </li>
             </ul>
         </li>
         <li class="nav-item">

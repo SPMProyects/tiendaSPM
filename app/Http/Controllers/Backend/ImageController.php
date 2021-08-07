@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\ImagesExport;
 use App\Image;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Spm\Zipper\Facades\Zipper;
 
 class ImageController extends Controller
 {
@@ -138,4 +141,35 @@ class ImageController extends Controller
         
         return redirect()->route('images.index')->with('status','Imagen eliminada correctamente');
     }
+
+    public function exportImport(){
+        return view('backend.images.export-import');
+    }
+
+    public function export(){
+
+        Excel::store(new ImagesExport, '\exports\images\images-list.xlsx');
+
+        //dump(storage_path('app\exports\products'));
+        //dd();
+
+        $folders_to_zip = [
+            public_path() . '\storage\images',
+            storage_path('app\exports\images'),
+        ];
+
+        $zip_file_name = public_path() . '\exports\images\images.zip';
+
+        Zipper::setZipFileName($zip_file_name);
+        Zipper::setFoldersToZip($folders_to_zip);
+        Zipper::makeZip();
+
+        return response()->download($zip_file_name)->deleteFileAfterSend();
+
+    }
+
+    public function import(){
+        
+    }
+
 }
