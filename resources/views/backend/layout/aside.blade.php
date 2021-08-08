@@ -80,6 +80,12 @@
                         <p>Pop Ups</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('config.export-import')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Exportar - Importar</p>
+                    </a>
+                </li>
             </ul>
         </li>
         <li class="nav-item">
@@ -262,6 +268,12 @@
                     <a href="{{route('orders.create')}}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Crear</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('orders.export-import')}}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Exportar - Importar</p>
                     </a>
                 </li>
             </ul>

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Configuration;
+use App\Exports\ConfigurationsExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
-
+use Maatwebsite\Excel\Facades\Excel;
+use Spm\Zipper\Facades\Zipper;
 
 class ConfigurationController extends Controller
 {
@@ -261,6 +263,20 @@ class ConfigurationController extends Controller
                 }
             }
         }
+    }
+
+    public function exportImport(){
+        return view('backend.config.export-import');
+    }
+
+    public function export(){
+        
+        return Excel::download(new ConfigurationsExport, 'configurations.xlsx');
+
+    }
+
+    public function import(){
+        
     }
 
 }

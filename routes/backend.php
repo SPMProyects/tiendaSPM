@@ -37,6 +37,9 @@ Route::middleware(['admin',])->group(function () {
     Route::post('order/products-remove', 'OrderController@productsRemove')->name('orders.products-remove');
     Route::post('order/quantity-change', 'OrderController@quantityChange')->name('orders.quantity-change');
     Route::post('order/delete-all-products', 'OrderController@delete_all_products')->name('orders.delete-all-products');
+    Route::get('order/export-import','OrderController@exportImport')->name('orders.export-import');
+    Route::get('order/export','OrderController@export')->name('orders.export');
+    Route::get('order/import','OrderController@import')->name('orders.import');
 
     //Config Routes
     Route::get('config/general', 'ConfigurationController@general')->name('config.general');
@@ -51,4 +54,7 @@ Route::middleware(['admin',])->group(function () {
     Route::post('config/updatechat-rrss-contact', 'ConfigurationController@updateChatRRSSContact')->name('config.updatechat-rsss-contact');
     Route::post('config/updateemail', 'ConfigurationController@updateEmail')->name('config.updateemail');
     Route::post('config/updatepopup', 'ConfigurationController@updatePopup')->name('config.updatepopup');
+    Route::get('config/export-import','ConfigurationController@exportImport')->name('config.export-import');
+    Route::get('config/export','ConfigurationController@export')->name('config.export');
+    Route::get('config/import','ConfigurationController@import')->name('config.import');
 });

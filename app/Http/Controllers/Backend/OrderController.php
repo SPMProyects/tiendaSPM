@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\OrdersExport;
+use App\Exports\OrdersProductExport;
 use App\Order;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Spm\Zipper\Facades\Zipper;
 
 class OrderController extends Controller
 {
@@ -290,6 +294,33 @@ class OrderController extends Controller
     public function delete_all_products(){
         session()->forget('quantity');
         session()->forget('products');
+    }
+
+    public function exportImport(){
+        return view('backend.orders.export-import');
+    }
+
+    public function export(){
+        
+        Excel::store(new OrdersExport, '\exports\orders\orders-list.xlsx');
+        Excel::store(new OrdersProductExport, '\exports\orders\ordersproducts-list.xlsx');
+
+        $folders_to_zip = [
+            storage_path('app\exports\orders'),
+        ];
+
+        $zip_file_name = public_path() . '\exports\orders\orders.zip';
+
+        Zipper::setZipFileName($zip_file_name);
+        Zipper::setFoldersToZip($folders_to_zip);
+        Zipper::makeZip();
+
+        return response()->download($zip_file_name)->deleteFileAfterSend();
+
+    }
+
+    public function import(){
+        
     }
 
 }

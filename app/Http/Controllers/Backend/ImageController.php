@@ -150,9 +150,6 @@ class ImageController extends Controller
 
         Excel::store(new ImagesExport, '\exports\images\images-list.xlsx');
 
-        //dump(storage_path('app\exports\products'));
-        //dd();
-
         $folders_to_zip = [
             public_path() . '\storage\images',
             storage_path('app\exports\images'),
