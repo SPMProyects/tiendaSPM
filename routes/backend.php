@@ -9,27 +9,27 @@ Route::middleware(['admin',])->group(function () {
     Route::resource('users', 'UserController');
     Route::get('user/export-import','UserController@exportImport')->name('users.export-import');
     Route::get('user/export','UserController@export')->name('users.export');
-    Route::get('user/import','UserController@import')->name('users.import');
+    Route::post('user/import','UserController@import')->name('users.import');
 
     Route::resource('currencies', 'CurrencyController');
     Route::get('currency/export-import','CurrencyController@exportImport')->name('currencies.export-import');
     Route::get('currency/export','CurrencyController@export')->name('currencies.export');
-    Route::get('currency/import','CurrencyController@import')->name('currencies.import');
+    Route::post('currency/import','CurrencyController@import')->name('currencies.import');
 
     Route::resource('categories', 'CategoryController');
     Route::get('category/export-import','CategoryController@exportImport')->name('categories.export-import');
     Route::get('category/export','CategoryController@export')->name('categories.export');
-    Route::get('category/import','CategoryController@import')->name('categories.import');
+    Route::post('category/import','CategoryController@import')->name('categories.import');
 
     Route::resource('products', 'ProductController');
     Route::get('product/export-import','ProductController@exportImport')->name('products.export-import');
     Route::get('product/export','ProductController@export')->name('products.export');
-    Route::get('product/import','ProductController@import')->name('products.import');
+    Route::post('product/import','ProductController@import')->name('products.import');
 
     Route::resource('images', 'ImageController');
     Route::get('image/export-import','ImageController@exportImport')->name('images.export-import');
     Route::get('image/export','ImageController@export')->name('images.export');
-    Route::get('image/import','ImageController@import')->name('images.import');
+    Route::post('image/import','ImageController@import')->name('images.import');
 
     //Order Routes
     Route::resource('orders', 'OrderController');
@@ -39,7 +39,7 @@ Route::middleware(['admin',])->group(function () {
     Route::post('order/delete-all-products', 'OrderController@delete_all_products')->name('orders.delete-all-products');
     Route::get('order/export-import','OrderController@exportImport')->name('orders.export-import');
     Route::get('order/export','OrderController@export')->name('orders.export');
-    Route::get('order/import','OrderController@import')->name('orders.import');
+    Route::post('order/import','OrderController@import')->name('orders.import');
 
     //Config Routes
     Route::get('config/general', 'ConfigurationController@general')->name('config.general');
@@ -56,5 +56,5 @@ Route::middleware(['admin',])->group(function () {
     Route::post('config/updatepopup', 'ConfigurationController@updatePopup')->name('config.updatepopup');
     Route::get('config/export-import','ConfigurationController@exportImport')->name('config.export-import');
     Route::get('config/export','ConfigurationController@export')->name('config.export');
-    Route::get('config/import','ConfigurationController@import')->name('config.import');
+    Route::post('config/import','ConfigurationController@import')->name('config.import');
 });

@@ -9,6 +9,7 @@ use App\Configuration;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewUser;
 use App\Exports\UsersExport;
+use App\Imports\UserImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
@@ -152,7 +153,18 @@ class UserController extends Controller
 
     }
 
-    public function import(){
+    public function import(Request $request){
         
+        $request->validate([
+            'excel-file' => 'required|mimes:xlsx,xls',
+            'encrypted' => 'required',
+        ]);
+        
+        Excel::import(new UserImport, $request->file('excel-file'));
+
+        session()->flash('status','La importación fue exitosa');
+
+        return redirect()->back();
+
     }
 }

@@ -68,7 +68,7 @@
                     <!-- /.card-body -->
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Crear</button>
-                      </div>
+                    </div>
                     </form>
                 </form>
               </div>
