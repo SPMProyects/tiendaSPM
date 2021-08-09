@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Currency;
 use App\Exports\CurrenciesExport;
+use App\Imports\CurrencyImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -129,8 +130,17 @@ class CurrencyController extends Controller
 
     }
 
-    public function import(){
+    public function import(Request $request){
+
+        $request->validate([
+            'excel-file' => 'required|mimes:xlsx,xls',
+        ]);
         
+        Excel::import(new CurrencyImport, $request->file('excel-file'));
+
+        session()->flash('status','La importación fue exitosa');
+
+        return redirect()->back();
     }
     
 }

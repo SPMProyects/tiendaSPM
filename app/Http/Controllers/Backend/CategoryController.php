@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
 use App\Exports\CategoriesExport;
+use App\Imports\CategoryImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
@@ -136,8 +137,16 @@ class CategoryController extends Controller
 
     }
 
-    public function import(){
+    public function import(Request $request){
+        $request->validate([
+            'excel-file' => 'required|mimes:xlsx,xls',
+        ]);
         
+        Excel::import(new CategoryImport, $request->file('excel-file'));
+
+        session()->flash('status','La importación fue exitosa');
+
+        return redirect()->back();
     }
 
 }
