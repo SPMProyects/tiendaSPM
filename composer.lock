@@ -2957,16 +2957,16 @@
         },
         {
             "name": "spm/zipper",
-            "version": "1.0.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/projectSPM/zipper.git",
-                "reference": "075ffa627f1d58999131a12c8d9b00fef094f714"
+                "reference": "c2863bdff7defc77cd09cea902e1738d3286d1ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/projectSPM/zipper/zipball/075ffa627f1d58999131a12c8d9b00fef094f714",
-                "reference": "075ffa627f1d58999131a12c8d9b00fef094f714",
+                "url": "https://api.github.com/repos/projectSPM/zipper/zipball/c2863bdff7defc77cd09cea902e1738d3286d1ac",
+                "reference": "c2863bdff7defc77cd09cea902e1738d3286d1ac",
                 "shasum": ""
             },
             "type": "library",
@@ -2998,9 +2998,9 @@
             "description": "Zip to all files in a folder and its subfolders recursively",
             "support": {
                 "issues": "https://github.com/projectSPM/zipper/issues",
-                "source": "https://github.com/projectSPM/zipper/tree/1.0.0"
+                "source": "https://github.com/projectSPM/zipper/tree/1.1.1"
             },
-            "time": "2021-08-06T01:19:30+00:00"
+            "time": "2021-08-12T00:49:21+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

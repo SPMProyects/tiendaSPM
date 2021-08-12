@@ -12,9 +12,10 @@ use App\Image;
 use App\Exports\ProductsExport;
 use App\Exports\ImagesExport;
 use App\Exports\ImagesProductsExport;
+use App\Imports\ProductImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Spm\Zipper\Facades\Zipper;
-
+use ZipArchive;
 
 class ProductController extends Controller
 {
@@ -239,8 +240,43 @@ class ProductController extends Controller
 
     }
 
-    public function import(){
+    public function import(Request $request){
+        //Recibir el archivo, descomprimirlo y utilizar la carpeta de las imágenes y la del Excel
+
+        $request->validate([
+            'excel-file' => 'required|mimes:zip',
+        ]);
         
+        if($request->hasFile('excel-file')){
+            
+            $name = str_replace('.zip','',$request->file('excel-file')->getClientOriginalName());
+            $excelName = public_path('storage\import') . "\\$name\products.xlsx";
+
+            Zipper::setPathToZipFile($request->file('excel-file')->path());
+            Zipper::setPathToUnzip(public_path('storage\import'));
+            Zipper::unZipFile();
+            
+            /*
+            $zip = new ZipArchive;
+
+            $comprimido = $zip->open($request->file('excel-file')->path());
+
+            if($comprimido == true){
+                $zip->extractTo(public_path('storage\import'));
+                $zip->close();
+            }
+            */
+
+            Excel::import(new ProductImport, $excelName);
+
+            Storage::disk('public')->deleteDirectory('import/' . $name);
+
+            session()->flash('status','La importación fue exitosa');
+
+            return redirect()->back();
+            
+        }
+
     }
     
 
