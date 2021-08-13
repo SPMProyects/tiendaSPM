@@ -7,6 +7,7 @@ use App\Exports\ConfigurationsExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use App\Imports\ConfigurationImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Spm\Zipper\Facades\Zipper;
 
@@ -275,8 +276,40 @@ class ConfigurationController extends Controller
 
     }
 
-    public function import(){
+    public function import(Request $request){
         
+        $request->validate([
+            'excel-file' => 'required|mimes:zip',
+        ]);
+
+        if($request->hasFile('excel-file')){
+            
+            $name = str_replace('.zip','',$request->file('excel-file')->getClientOriginalName());
+            $excelName = public_path('storage\import') . "\\$name\configurations.xlsx";
+
+            Zipper::setPathToZipFile($request->file('excel-file')->path());
+            Zipper::setPathToUnzip(public_path('storage\import'));
+            Zipper::unZipFile();
+
+            Excel::import(new ConfigurationImport, $excelName);
+        
+            Storage::disk('public')->deleteDirectory('company');
+            Storage::disk('public')->deleteDirectory('home');
+            Storage::disk('public')->deleteDirectory('general');
+            Storage::disk('public')->deleteDirectory('popup');
+            Storage::disk('public')->move('import\configuration\company', '\company');
+            Storage::disk('public')->move('import\configuration\home', '\home');
+            Storage::disk('public')->move('import\configuration\general', '\general');
+            Storage::disk('public')->move('import\configuration\popup', '\popup');
+
+            Storage::disk('public')->deleteDirectory('import/' . $name);
+
+            session()->flash('status','La importación fue exitosa');
+
+            return redirect()->back();
+            
+        }
+
     }
 
 }

@@ -255,17 +255,6 @@ class ProductController extends Controller
             Zipper::setPathToZipFile($request->file('excel-file')->path());
             Zipper::setPathToUnzip(public_path('storage\import'));
             Zipper::unZipFile();
-            
-            /*
-            $zip = new ZipArchive;
-
-            $comprimido = $zip->open($request->file('excel-file')->path());
-
-            if($comprimido == true){
-                $zip->extractTo(public_path('storage\import'));
-                $zip->close();
-            }
-            */
 
             Excel::import(new ProductImport, $excelName);
 

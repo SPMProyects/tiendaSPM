@@ -39,7 +39,19 @@ class HomeController extends Controller
     public function index()
     {
         //PRUEBAS
-        
+        Storage::disk('public')->deleteDirectory('company');
+        Storage::disk('public')->deleteDirectory('home');
+        Storage::disk('public')->deleteDirectory('general');
+        Storage::disk('public')->deleteDirectory('popup');
+        Storage::disk('public')->move('import\configuration\company', '\company');
+        Storage::disk('public')->move('import\configuration\home', '\home');
+        Storage::disk('public')->move('import\configuration\general', '\general');
+        Storage::disk('public')->move('import\configuration\popup', '\popup');
+
+        //Storage::disk('public')->delete($name_path_full);
+
+        //Storage::disk('public')->deleteDirectory('import/' . $name);
+
         dd();
         return view('home');
 

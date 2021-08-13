@@ -21,13 +21,6 @@ class ImageSheetImport implements ToModel, WithHeadingRow
         
         $name_path_full = 'import/' . $folderZip . '/' . $row['path'];
         $name_path = str_replace('import/' . $folderZip . '/', '', $name_path_full);
-        $name_img = str_replace('images/','',$name_path);
-
-        //dump($name_path_full);
-        //dump($name_path);
-        //dump($name_img);
-
-        //dd();
 
         if(Image::where('path', $name_path)->count() == 0){
             

@@ -7,6 +7,9 @@ use App\Image;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\ImageProductSheetImport;
+use App\Imports\ImageSheetImport;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Spm\Zipper\Facades\Zipper;
 
@@ -165,8 +168,31 @@ class ImageController extends Controller
 
     }
 
-    public function import(){
+    public function import(Request $request){
         
+        $request->validate([
+            'excel-file' => 'required|mimes:zip',
+        ]);
+        
+        if($request->hasFile('excel-file')){
+            
+            $name = str_replace('.zip','',$request->file('excel-file')->getClientOriginalName());
+            $excelName = public_path('storage\import') . "\\$name\images.xlsx";
+
+            Zipper::setPathToZipFile($request->file('excel-file')->path());
+            Zipper::setPathToUnzip(public_path('storage\import'));
+            Zipper::unZipFile();
+
+            Excel::import(new ImageSheetImport, $excelName);
+            
+            Storage::disk('public')->deleteDirectory('import/' . $name);
+
+            session()->flash('status','La importación fue exitosa');
+
+            return redirect()->back();
+            
+        }
+
     }
 
 }

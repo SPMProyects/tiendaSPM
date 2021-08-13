@@ -9,6 +9,7 @@ use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\OrderImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Spm\Zipper\Facades\Zipper;
 
@@ -319,8 +320,20 @@ class OrderController extends Controller
 
     }
 
-    public function import(){
+    public function import(Request $request){
+        $request->validate([
+            'excel-file' => 'required|mimes:xlsx,xls',
+        ]);
         
+        if($request->hasFile('excel-file')){
+            
+            Excel::import(new OrderImport, $request->file('excel-file'));
+
+            session()->flash('status','La importación fue exitosa');
+
+            return redirect()->back();
+            
+        }
     }
 
 }
