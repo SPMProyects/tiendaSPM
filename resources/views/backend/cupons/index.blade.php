@@ -1,9 +1,9 @@
 @extends('backend.layout.layout')
 
-@section('title', 'Categorias')
+@section('title', 'Usuarios')
 
 @section('styles')
-    <!-- DataTables -->
+      <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('back/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('back/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('back/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
@@ -14,13 +14,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Lista de Productos</h1>
+                    <h1>Lista de monedas</h1>
                 </div>
                 <div class="col-sm-6 text-right">
                     @if (request()->has('lista') && request()->input('lista') == 'eliminados')
-                        <a href="{{route('products.index')}}"class="btn btn-primary">Activas</a>
+                        <a href="{{route('cupons.index')}}"class="btn btn-primary">Activas</a>
                     @else
-                        <a href="{{route('products.index',['lista' => 'eliminados'])}}"class="btn btn-info">Papelera</a>
+                        <a href="{{route('cupons.index',['lista' => 'eliminados'])}}"class="btn btn-info">Papelera</a>
                     @endif
                     
                 </div>
@@ -43,69 +43,55 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">Lista de productos</h3>
+                  <h3 class="card-title">Lista de cupones</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
 
-                    <table id="product_list" class="table table-bordered table-striped">
+                    <table id="cupons_list" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>IMAGEN</th>
                                 <th>NOMBRE</th>
-                                <th>CATEGORIA</th>
-                                <th>MONEDA</th>
-                                <th>PRECIO</th>
-                                <th>OFERTA</th>
-                                <th>DESTACADO</th>
-                                <th>ACTIVO</th>                                
+                                <th>TIEMPO DE USO</th>
+                                <th>TIPO</th>
+                                <th>VALOR</th>
+                                <th>MAXIMOS USOS</th>
+                                <th>ACTIVO</th>
                                 <th>ACCIONES</th>
                             </tr>
                         </thead>
                         <tbody>
                             
-                            @empty($products)
+                            @empty($cupons)
                             
                             @else
 
-                                @foreach ($products as $product)
+                                @foreach ($cupons as $cupon)
                                     <tr>
-                                        <td>{{$product->id}}</td>
-                                        <td>
-                                            @if ($product->images->first())
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                    <a href="/storage/{{$product->images->first()->path}}" data-toggle="lightbox" data-title="Imagen producto {{$product->id}}">
-                                                        <img src="/storage/{{$product->images->first()->path}}" class="img-thumbnail"/>
-                                                    </a>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        </td>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->category->name}}</td>
-                                        <td>{{$product->currency->name}}</td>
-                                        <td>{{$product->price}}</td>
-                                        <td>{{$product->sales_price}}</td>
-                                        <td>{{$product->active == '1' ? 'Si' : 'No'}}</td>
-                                        <td>{{$product->featured == '1' ? 'Si' : 'No'}}</td>
+                                        <td>{{$cupon->id}}</td>
+                                        <td>{{$cupon->name}}</td>
+                                        <td>{{$cupon->time_alive}}</td>
+                                        <td>{{$cupon->type}}</td>
+                                        <td>{{$cupon->value}}</td>
+                                        <td>{{$cupon->maximum_uses}}</td>
+                                        <td>{{$cupon->active}}</td>
                                         <td>
                                             @if (request()->has('lista') && request()->input('lista') == 'eliminados')
-                                                <form action="{{route('products.destroy',[$product->id])}}" method="POST" >
+                                                <form action="{{route('cupons.destroy',[$cupon->id])}}" method="POST" >
                                                     @csrf
                                                     @method("DELETE")
                                                     <input type="hidden" name="eliminar" value="eliminar">
                                                     <input class= "btn btn-danger" type="submit" value="Eliminar definitivo">
                                                 </form>
                                             @else
-                                                <form action="{{route('products.destroy',[$product->id])}}" method="POST" >
+                                                <form action="{{route('cupons.destroy',[$cupon->id])}}" method="POST" >
                                                     @csrf
                                                     @method("DELETE")
                                                     <input class= "btn btn-danger" type="submit" value="Eliminar">
                                                 </form>
                                                 
-                                                <form action="{{route('products.edit',[$product->id])}}" method="GET" >
+                                                <form action="{{route('cupons.edit',[$cupon->id])}}" method="GET" >
                                                     @csrf
                                                     @method("GET")
                                                     <input class= "btn btn-success" type="submit" value="Editar">
@@ -141,15 +127,10 @@
     <script src="{{asset('back/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
     <script src="{{asset('back/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
     <script src="{{asset('back/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('back/plugins/jszip/jszip.min.js')}}"></script>
-    <script src="{{asset('back/plugins/pdfmake/pdfmake.min.js')}}"></script>
-    <script src="{{asset('back/plugins/pdfmake/vfs_fonts.js')}}"></script>
     <script src="{{asset('back/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
     <script src="{{asset('back/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('back/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 
-    <script src="{{asset('back/plugins/ekko-lightbox/ekko-lightbox.min.js')}}"></script>
-    
     <!-- User Laravel Mix Scripts-->
-    <script src="{{asset('js/product.js')}}"></script>
+    <script src="{{asset('js/cupons.js')}}"></script>
 @endsection

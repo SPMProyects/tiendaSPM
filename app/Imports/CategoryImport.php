@@ -25,7 +25,7 @@ class CategoryImport implements ToModel, WithHeadingRow
             return;
         }else{
             
-            $category = $category::create([
+            $category = Category::create([
                 'name' => $row['name'],
                 'value' => $row['value'],
                 'parent_id' => $row['parent_id'],

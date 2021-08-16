@@ -31,6 +31,12 @@ Route::middleware(['admin',])->group(function () {
     Route::get('image/export','ImageController@export')->name('images.export');
     Route::post('image/import','ImageController@import')->name('images.import');
 
+    Route::resource('cupons', 'CuponController');
+    Route::get('cupon/export-import','CuponController@exportImport')->name('cupon.export-import');
+    Route::get('cupon/export','CuponController@export')->name('cupon.export');
+    Route::post('cupon/import','CuponController@import')->name('cupon.import');
+    Route::post('cupon/search-element','CuponController@searchElement')->name('cupon.search-element');
+
     //Order Routes
     Route::resource('orders', 'OrderController');
     Route::post('order/products-add', 'OrderController@productsAdd')->name('orders.products-add');
